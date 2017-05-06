@@ -3,9 +3,11 @@
 
 	$.fn.extend({
 		pw_select2: function() {
-			$(this).select2({
+			var $this = $(this);
+			var config = {
 				allowClear: true
-			});
+			};
+			$this.select2( config );
 		},
 		select2_sortable: function () {
 			var select = $(this);
