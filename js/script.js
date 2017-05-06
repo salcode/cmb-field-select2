@@ -1,12 +1,6 @@
 (function ($) {
 	'use strict';
 
-	$('.pw_select').each(function () {
-		$(this).select2({
-			allowClear: true
-		});
-	});
-
 	$.fn.extend({
 		select2_sortable: function () {
 			var select = $(this);
@@ -25,6 +19,12 @@
 				}
 			});
 		}
+	});
+
+	$('.pw_select').each(function () {
+		$(this).select2({
+			allowClear: true
+		});
 	});
 
 	$('.pw_multiselect').each(function () {
