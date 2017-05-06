@@ -2,6 +2,11 @@
 	'use strict';
 
 	$.fn.extend({
+		pw_select2: function() {
+			$(this).select2({
+				allowClear: true
+			});
+		},
 		select2_sortable: function () {
 			var select = $(this);
 			$(select).select2();
@@ -22,9 +27,7 @@
 	});
 
 	$('.pw_select').each(function () {
-		$(this).select2({
-			allowClear: true
-		});
+		$(this).pw_select2();
 	});
 
 	$('.pw_multiselect').each(function () {
@@ -45,9 +48,7 @@
 	$('.cmb-repeatable-group').on('cmb2_add_row', function (event, newRow) {
 		$(newRow).find('.pw_select').each(function () {
 			$('option:selected', this).removeAttr("selected");
-			$(this).select2({
-				allowClear: true
-			});
+			$(this).pw_select2();
 		});
 
 		$(newRow).find('.pw_multiselect').each(function () {
@@ -57,9 +58,7 @@
 
 		// Reinitialise the field we previously destroyed
 		$(newRow).prev().find('.pw_select').each(function () {
-			$(this).select2({
-				allowClear: true
-			});
+			$(this).pw_select2();
 		});
 
 		// Reinitialise the field we previously destroyed
@@ -81,9 +80,7 @@
 	$('.cmb-repeatable-group').on('cmb2_shift_rows_complete', function (event, instance) {
 		var groupWrap = $(instance).closest('.cmb-repeatable-group');
 		groupWrap.find('.pw_select').each(function () {
-			$(this).select2({
-				allowClear: true
-			});
+			$(this).pw_select2();
 		});
 
 		groupWrap.find('.pw_multiselect').each(function () {
@@ -107,9 +104,7 @@
 		// Reinitialise the field we previously destroyed
 		$(newRow).prev().find('.pw_select').each(function () {
 			$('option:selected', this).removeAttr("selected");
-			$(this).select2({
-				allowClear: true
-			});
+			$(this).pw_select2();
 		});
 
 		// Reinitialise the field we previously destroyed
