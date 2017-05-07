@@ -9,6 +9,7 @@
 			var config = {
 				allowClear: true
 			};
+			var removedDataAttributesToAddBack = {};
 			if ( templateResultStr ) {
 				// Add to our configuration.
 				config.templateResult = stringToFunction( templateResultStr );
@@ -16,6 +17,7 @@
 				$this.removeData( 'template-result' );
 				// Remove data attribute from DOM element.
 				$this.removeAttr( 'data-template-result' );
+				removedDataAttributesToAddBack['data-template-result'] = templateResultStr;
 			}
 			if ( templateSelectionStr ) {
 				config.templateSelection= stringToFunction( templateSelectionStr );
@@ -23,8 +25,13 @@
 				$this.removeData( 'template-selection' );
 				// Remove data attribute from DOM element.
 				$this.removeAttr( 'data-template-selection' );
+				removedDataAttributesToAddBack['data-template-selection'] = templateSelectionStr;
 			}
 			$this.select2( config );
+			// Add removed data attributes back to the DOM element.
+			$.each( removedDataAttributesToAddBack, function( key, value ) {
+				$this.attr( key, value );
+			} );
 		},
 		select2_sortable: function () {
 			var select = $(this);
