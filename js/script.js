@@ -4,9 +4,26 @@
 	$.fn.extend({
 		pw_select2: function() {
 			var $this = $(this);
+			var templateResultStr = $this.data('template-result');
+			var templateSelectionStr = $this.data('template-selection');
 			var config = {
 				allowClear: true
 			};
+			if ( templateResultStr ) {
+				// Add to our configuration.
+				config.templateResult = stringToFunction( templateResultStr );
+				// Remove data attribute from jQuery cache.
+				$this.removeData( 'template-result' );
+				// Remove data attribute from DOM element.
+				$this.removeAttr( 'data-template-result' );
+			}
+			if ( templateSelectionStr ) {
+				config.templateSelection= stringToFunction( templateSelectionStr );
+				// Remove data attribute from jQuery cache.
+				$this.removeData( 'template-selection' );
+				// Remove data attribute from DOM element.
+				$this.removeAttr( 'data-template-selection' );
+			}
 			$this.select2( config );
 		},
 		select2_sortable: function () {
@@ -115,4 +132,19 @@
 			$(this).select2_sortable();
 		});
 	});
+
+	/**
+	 * Return the function with the given name.
+	 *
+	 * @param string fnStr The name of the function.
+	 * @return undefined|function The function object.
+	 */
+	function stringToFunction( fnStr ) {
+		var fn = window[fnStr];
+		if ('function' !== typeof fn ) {
+			// There is no function matching the name in fnStr.
+			return;
+		}
+		return fn;
+	};
 })(jQuery);
